@@ -57,7 +57,7 @@ namespace ProniaMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Slides");
+                    b.ToTable("Slides", (string)null);
                 });
 #pragma warning restore 612, 618
         }

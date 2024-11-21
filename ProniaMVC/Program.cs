@@ -10,9 +10,12 @@ namespace ProniaMVC
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<AppDBContext>
-                (option => option.UseSqlServer("server=DESKTOP-RLSUGQE\\SQLEXPRESS;database=Pronia;trusted_connection=true;integrated security=true;TrustServerCertificate=true;")
-                );
+            builder.Services.AddDbContext<AppDBContext>(opt=>
+            
+            opt.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
+            
+            );
+
             var app = builder.Build();
             app.UseStaticFiles();
 
