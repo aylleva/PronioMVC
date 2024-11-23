@@ -14,18 +14,18 @@ namespace ProniaMVC.Controllers
             _context = context;     
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             
                 HomeVM vm = new HomeVM {
-                Slides = _context.Slides
+                Slides = await _context.Slides
                 .OrderBy(s=>s.Order)
                 .Take(2)
-                .ToList(),
+                .ToListAsync(),
 
-                Products=_context.Products
+                Products=await _context.Products
                 .Take(8)
-                .Include(img=>img.ProductImages.Where(pi=>pi.IsPrimary!=null)).ToList(), 
+                .Include(img=>img.ProductImages.Where(pi=>pi.IsPrimary!=null)).ToListAsync(), 
             };
             return View(vm);  
         }
