@@ -19,6 +19,7 @@ namespace ProniaMVC
             var app = builder.Build();
             app.UseStaticFiles();
 
+            
             app.MapControllerRoute(
 
                "default",

@@ -466,7 +466,7 @@
                            @foreach(var product in Model.RelatedProducts){
                                 <div class="swiper-slide product-item">
                                     <div class="product-img">
-                                        <a href="single-product-variable.html">
+                                        <a asp-controller="shop" asp-action="detail" asp-route-id="@product.Id">
                                             <img class="primary-img"
                                                  src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(img=>img.IsPrimary==true).Image"
                                                  alt="Product Images" />
@@ -515,7 +515,7 @@
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <a class="product-name" asp-controller="shop" asp-action="detail" asp-route="@product.Id"
+                                        <a class="product-name" asp-controller="shop" asp-action="detail" asp-route-id="@product.Id"
                                           >@product.Name</a>
                                         <div class="price-box pb-1">
                                             <span class="new-price">$roduct.Price</span>
