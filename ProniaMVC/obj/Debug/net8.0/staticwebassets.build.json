@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jQRTNTneR4otCqRiB9XN/SdS5Ynfz6hH9uhw1JfUdus=",
+  "Hash": "SEP8k8cw21AdQROM5U1M4woSw45S8OkKzpuJg0oKBTI=",
   "Source": "ProniaMVC",
   "BasePath": "_content/ProniaMVC",
   "Mode": "Default",
@@ -5160,6 +5160,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\service.png"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\Sunflowers.jpeg",
+      "SourceId": "ProniaMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\",
+      "BasePath": "_content/ProniaMVC",
+      "RelativePath": "assets/images/website-images/Sunflowers#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gza6vw2saz",
+      "Integrity": "5GPZNVTUwwukAbSQMiz3nOzzn1O4XPXvWNr4mmeM0Q4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\Sunflowers.jpeg"
     },
     {
       "Identity": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\js\\main.js",
@@ -26258,6 +26279,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-/A1yyxYN0TSpHTbOiLcI+jKz0BtLJ0rynaHGNFmekyA="
+        }
+      ]
+    },
+    {
+      "Route": "assets/images/website-images/Sunflowers.gza6vw2saz.jpeg",
+      "AssetFile": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\Sunflowers.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22752"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5GPZNVTUwwukAbSQMiz3nOzzn1O4XPXvWNr4mmeM0Q4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 25 Nov 2024 21:40:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gza6vw2saz"
+        },
+        {
+          "Name": "label",
+          "Value": "assets/images/website-images/Sunflowers.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5GPZNVTUwwukAbSQMiz3nOzzn1O4XPXvWNr4mmeM0Q4="
+        }
+      ]
+    },
+    {
+      "Route": "assets/images/website-images/Sunflowers.jpeg",
+      "AssetFile": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\Sunflowers.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22752"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5GPZNVTUwwukAbSQMiz3nOzzn1O4XPXvWNr4mmeM0Q4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 25 Nov 2024 21:40:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5GPZNVTUwwukAbSQMiz3nOzzn1O4XPXvWNr4mmeM0Q4="
         }
       ]
     },

@@ -243,6 +243,7 @@ wwwroot\assets\images\website-images\dark.png
 wwwroot\assets\images\website-images\images.jpeg
 wwwroot\assets\images\website-images\quotation.png
 wwwroot\assets\images\website-images\service.png
+wwwroot\assets\images\website-images\Sunflowers.jpeg
 wwwroot\assets\js\main.js
 wwwroot\assets\js\plugins.min.js
 wwwroot\assets\js\plugins\ion.rangeSlider.min.js

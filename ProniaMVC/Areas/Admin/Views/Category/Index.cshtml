@@ -45,8 +45,8 @@
                                     <p>@category.Product.Count</p>
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning" title="Update"><i class="mdi mdi-spotlight-beam"></i></a>
-                                    <a class="btn btn-danger" title="Delete"><i class="mdi mdi-delete-forever"></i></a>
+                                    <a class="btn btn-warning" title="Update" asp-action="update" asp-route-id="@category.Id"><i class="mdi mdi-spotlight-beam"></i></a>
+                                    <a class="btn btn-danger" title="Delete" asp-action="delete" asp-route-id="@category.Id"><i class="mdi mdi-delete-forever"></i></a>
                                     <a class="btn btn-primary" title="Detail"><i class="mdi mdi-eye"></i></a>
                                 </td>
                                 

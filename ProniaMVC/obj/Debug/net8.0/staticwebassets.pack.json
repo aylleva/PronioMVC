@@ -957,6 +957,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\3.png"
     },
     {
+      "Id": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\Sunflowers.jpeg",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\Sunflowers.jpeg"
+    },
+    {
       "Id": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\car.png",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\car.png"
     },
