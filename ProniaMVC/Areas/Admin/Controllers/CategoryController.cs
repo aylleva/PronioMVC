@@ -97,5 +97,7 @@ namespace ProniaMVC.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }

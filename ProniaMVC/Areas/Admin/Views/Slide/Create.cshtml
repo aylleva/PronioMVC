@@ -5,11 +5,11 @@
             <div class="card-body">
                 <h4 class="card-title">Craete a Slide</h4>
 
-                <form class="forms-sample" method="post">
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="exampleInputName1">Image</label>
-                        <input asp-for=Image class="form-control" placeholder="Image">
-                        <span asp-validation-for="Image" class="text-danger"></span>
+                        <label for="exampleInputName1">Photo</label>
+                        <input asp-for=Photo class="form-control" placeholder="Photo">
+                        <span asp-validation-for="Photo" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Title</label>
