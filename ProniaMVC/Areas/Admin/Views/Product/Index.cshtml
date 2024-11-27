@@ -1,0 +1,74 @@
+﻿@model List<GetProductVM>
+
+@{
+    int count = 0;
+}
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Product Table</h4>
+                <p class="card-description">
+                    <a asp-action="create" class="btn btn-success">Create a Product </a>
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    NO
+                                </th>
+                                <th>
+                                     Image
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                                <th>
+                                    Category
+                                <th>
+                                    Settings
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>
+                                        @count
+                                    </td>
+                                    <td>
+                                        <img src="~/assets/images/website-images/@product.Image" />
+                                    </td>
+                                    <td>
+                                        <p>@product.Name</p>
+                                    </td>
+                                    <td>
+                                        <p>$@product.Price</p>
+                                    </td>
+                                    <td>
+                                        <p>@product.CategoryName</p>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-warning" title="Update" asp-action="update" asp-route-id="@product.Id"><i class="mdi mdi-spotlight-beam"></i></a>
+                                        <a class="btn btn-danger" title="Delete" asp-action="delete" asp-route-id="@product.Id"><i class="mdi mdi-delete-forever"></i></a>
+                                        <a class="btn btn-primary" title="Detail"><i class="mdi mdi-eye"></i></a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
