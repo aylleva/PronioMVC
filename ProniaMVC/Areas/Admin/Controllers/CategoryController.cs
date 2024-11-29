@@ -99,5 +99,15 @@ namespace ProniaMVC.Areas.Admin.Controllers
         }
 
 
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null || id < 1) return BadRequest();
+
+            Category category=await _context.Categories.FirstOrDefaultAsync(c=>c.Id==id);
+            if (category == null) return NotFound();
+            return View(category);
+        }
+
+
     }
 }

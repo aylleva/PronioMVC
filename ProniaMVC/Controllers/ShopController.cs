@@ -27,6 +27,8 @@ namespace ProniaMVC.Controllers
             Product? product =await _context.Products
                 .Include(p=>p.ProductImages.OrderByDescending(p=>p.IsPrimary))
                 .Include(p=>p.Category)
+                .Include(p=>p.Tags)
+                .ThenInclude(t=>t.Tag)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product is null) return NotFound();

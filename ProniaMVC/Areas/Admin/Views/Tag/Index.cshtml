@@ -1,0 +1,63 @@
+﻿
+@model List<GetTagVM>
+
+@{
+    int count = 0;
+}
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tags Table</h4>
+                <p class="card-description">
+                    <a asp-action="create" class="btn btn-success">Create a Tag</a>
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    NO
+                                </th>
+                                <th>
+                                   Tag Name
+                                </th>
+                                <th>
+                                    Product Count
+                                </th>
+                                <th>
+                                    Settings
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ( var tag in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>
+                                        @count
+                                    </td>
+                                    <td>
+                                        <p>@tag.Name</p>
+                                    </td>
+                                    <td>
+                                        <p>@tag.Products.Count</p>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-warning" title="Update" asp-action="update" asp-route-id="@tag.Id"><i class="mdi mdi-spotlight-beam"></i></a>
+                                        <a class="btn btn-danger" title="Delete" asp-action="delete" asp-route-id="@tag.Id"><i class="mdi mdi-delete-forever"></i></a>
+                                        <a class="btn btn-primary" title="Detail"><i class="mdi mdi-eye"></i></a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

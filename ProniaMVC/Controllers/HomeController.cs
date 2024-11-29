@@ -24,8 +24,9 @@ namespace ProniaMVC.Controllers
                 .ToListAsync(),
 
                 Products=await _context.Products
-                .Take(8)
-                .Include(img=>img.ProductImages.Where(pi=>pi.IsPrimary!=null)).ToListAsync(), 
+                //.Take(7)
+                .Include(img => img.ProductImages/*.Where(pi => pi.IsPrimary != null)*/)
+                .ToListAsync(), 
             };
             return View(vm);  
         }

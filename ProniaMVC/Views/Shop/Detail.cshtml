@@ -195,9 +195,11 @@
                         <div class="product-category product-tags">
                             <span class="title">Tags :</span>
                             <ul>
-                                <li>
-                                    <a href="#">Furniture</a>
-                                </li>
+                              @foreach(var tag in Model.Product.Tags){
+                                    <li>
+                                        <a href="#">@string.Join(",",tag.Tag.Name)</a>
+                                    </li>
+                              }
                             </ul>
                         </div>
                         <div class="product-category social-link align-items-center pb-0">
@@ -468,10 +470,10 @@
                                     <div class="product-img">
                                         <a asp-controller="shop" asp-action="detail" asp-route-id="@product.Id">
                                             <img class="primary-img"
-                                                 src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(img=>img.IsPrimary==true).Image"
+                                                 src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(img=>img.IsPrimary==true)?.Image"
                                                  alt="Product Images" />
                                             <img class="secondary-img"
-                                                 src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(img=>img.IsPrimary==false).Image"
+                                                 src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(img=>img.IsPrimary==false)?.Image"
                                                  alt="Product Images" />
                                         </a>
                                         <div class="product-add-action">

@@ -13,5 +13,6 @@ namespace ProniaMVC.Models
         public Category Category { get; set; }
         public List<ProductImage> ProductImages { get; set; }
 
+        public List<ProductTags> Tags { get; set; }
     }
 }
