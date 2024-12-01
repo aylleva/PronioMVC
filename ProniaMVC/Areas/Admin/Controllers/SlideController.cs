@@ -38,7 +38,7 @@ namespace ProniaMVC.Areas.Admin.Controllers
                 ModelState.AddModelError("Photo", "Wrong Format!");
                 return View();
             }
-            if (!slideVM.Photo.CheckFileSize(Utilitie.Enums.FileSize.MB,2))
+            if (!slideVM.Photo.CheckFileSize(FileSize.MB,2))
             {
                 ModelState.AddModelError("Photo", "File length must contains max 2MB");
                 return View();
@@ -106,7 +106,7 @@ namespace ProniaMVC.Areas.Admin.Controllers
                     ModelState.AddModelError("Photo", "Wrong Format!");
                     return View();
                 }
-                if (!slideVM.Photo.CheckFileSize(Utilitie.Enums.FileSize.MB, 2))
+                if (!slideVM.Photo.CheckFileSize(FileSize.MB, 2))
                 {
                     ModelState.AddModelError("Photo", "File length must contains max 2MB");
                     return View();

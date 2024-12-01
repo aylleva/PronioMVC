@@ -20,7 +20,7 @@ namespace ProniaMVC.Controllers
                 HomeVM vm = new HomeVM {
                 Slides = await _context.Slides
                 .OrderBy(s=>s.Order)
-                .Take(2)
+                .Take(10)
                 .ToListAsync(),
 
                 Products=await _context.Products

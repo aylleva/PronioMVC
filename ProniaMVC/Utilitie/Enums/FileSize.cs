@@ -1,4 +1,4 @@
-﻿namespace ProniaMVC.Utilitie.Enums
+﻿namespace ProniaMVC
 {
     public enum FileSize
     {

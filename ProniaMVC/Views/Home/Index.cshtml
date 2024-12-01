@@ -6,6 +6,7 @@
     <!-- Main Slider -->
     <div class="swiper-container main-slider swiper-arrow with-bg_white">
         <div class="swiper-wrapper">
+        
             @foreach(var slide in Model.Slides){
                 <div class="swiper-slide animation-style-01">
                     <div class="slide-inner style-1 bg-height"
@@ -308,10 +309,10 @@
                                         <div class="product-img">
                                             <a href="shop.html">
                                                 <img class="primary-img"
-                                                     src="~/assets/images/website-images//@product.ProductImages.FirstOrDefault(i=>i.IsPrimary==true).Image"
+                                                     src="~/assets/images/website-images//@product.ProductImages.FirstOrDefault(i=>i.IsPrimary==true)?.Image"
                                                      alt="Product Images" />
                                                 <img class="secondary-img"
-                                                     src="~/assets/images/website-images//@product.ProductImages.FirstOrDefault(i=>i.IsPrimary==false).Image"
+                                                     src="~/assets/images/website-images//@product.ProductImages.FirstOrDefault(i=>i.IsPrimary==false)?.Image"
                                                      alt="Product Images" />
                                             </a>
                                             <div class="product-add-action">
@@ -478,10 +479,10 @@
                                 <div class="product-img">
                                     <a href="shop.html">
                                         <img class="primary-img"
-                                             src="~/assets/images/website-images//@product.ProductImages.FirstOrDefault(p=>p.IsPrimary==true).Image"
+                                             src="~/assets/images/website-images//@product.ProductImages.FirstOrDefault(p=>p.IsPrimary==true)?.Image"
                                              alt="Product Images" />
                                         <img class="secondary-img"
-                                             src="~/assets/images/website-images//@product.ProductImages.FirstOrDefault(p=>p.IsPrimary==false).Image"
+                                             src="~/assets/images/website-images//@product.ProductImages.FirstOrDefault(p=>p.IsPrimary==false)?.Image"
                                              alt="Product Images" />
                                     </a>
                                     <div class="product-add-action">

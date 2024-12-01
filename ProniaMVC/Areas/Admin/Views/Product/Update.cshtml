@@ -1,4 +1,5 @@
-﻿@model UpdateProductVM
+﻿@using ProniaMVC.Models.Base
+@model UpdateProductVM
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
@@ -30,13 +31,32 @@
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="ColorIds">Choose Colors</label>
+                        <select asp-for="ColorIds" class="form-control" asp-items="new SelectList(Model.Colors,nameof(Color.Id),nameof(Color.Name))">
+                        </select>
+                        <span asp-validation-for="ColorIds" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SizeIds">Choose Sizes</label>
+                        <select asp-for="SizeIds" class="form-control" asp-items="new SelectList(Model.Sizes,nameof(Size.Id),nameof(Size.Name))">
+                        </select>
+                        <span asp-validation-for="SizeIds" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TagIds">Tags</label>
+                        <select asp-for="TagIds" class="form-control" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))">
+                        </select>
+                        <span asp-validation-for="TagIds" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputName1">Description</label>
                         <textarea asp-for=Description class="form-control" placeholder="Description"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
+                    <a asp-action="index" class="btn btn-light">Cancel</a>
                 </form>
             </div>
         </div>

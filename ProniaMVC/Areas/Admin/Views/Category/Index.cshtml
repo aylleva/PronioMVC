@@ -1,5 +1,5 @@
 ﻿
-@model List<Category>
+@model List<GetCategoryVM>
 
 @{
     int count = 0;
@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(Category category in Model){
+                        @foreach(var category in Model){
                             count++;
                             <tr>
                                 <td>
@@ -42,12 +42,12 @@
                                     <p>@category.Name</p>
                                 </td>
                                 <td>
-                                    <p>@category.Product.Count</p>
+                                    <p>@category.ProductCount</p>
                                 </td>
                                 <td>
                                     <a class="btn btn-warning" title="Update" asp-action="update" asp-route-id="@category.Id"><i class="mdi mdi-spotlight-beam"></i></a>
                                     <a class="btn btn-danger" title="Delete" asp-action="delete" asp-route-id="@category.Id"><i class="mdi mdi-delete-forever"></i></a>
-                                    <a class="btn btn-primary" title="Detail"><i class="mdi mdi-eye"></i></a>
+                                    <a class="btn btn-primary" title="Detail" asp-action="detail" asp-route-id="@category.Id"><i  class="mdi mdi-eye"></i></a>
                                 </td>
                                 
                             </tr>

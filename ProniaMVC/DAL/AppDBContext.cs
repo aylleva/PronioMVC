@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProniaMVC.Models;
+using ProniaMVC.Models.Base;
 
 namespace ProniaMVC.DAL
 {
@@ -15,5 +16,10 @@ namespace ProniaMVC.DAL
 
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ProductTags> ProductTags { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ProductColors> ProductColors { get; set; }
+        public DbSet<Size> Sizes { get; set; }  
+        public DbSet<ProductSizes> ProductSizes { get; set; }
     }
 }

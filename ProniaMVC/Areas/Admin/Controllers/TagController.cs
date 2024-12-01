@@ -18,20 +18,18 @@ namespace ProniaMVC.Areas.Admin.Controllers
             _env = env;
         }
         public async Task<IActionResult> Index()
+        
         {
-            List<GetTagVM> tagVM = await _context.Tags
+           List<GetTagVM> tagVM = await _context.Tags
              .Include(t=>t.Tags)
-             .ThenInclude(t=>t.Product)
              .Select(t=> new GetTagVM 
              {
-                 Name = t.Name,
+                 Id=t.Id,   
+                 Name=t.Name
 
-             
-             
-             
              }).ToListAsync();
 
-                ;
+                
             return View(tagVM);
         }
 

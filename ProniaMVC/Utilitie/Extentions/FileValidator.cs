@@ -1,6 +1,7 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ProniaMVC.Models;
-using ProniaMVC.Utilitie.Enums;
+
 using System.IdentityModel.Tokens.Jwt;
 
 namespace ProniaMVC.Utilitie.Extentions
@@ -64,5 +65,7 @@ namespace ProniaMVC.Utilitie.Extentions
         {
             File.Delete(file.CreatePath(roots));
         }
+
+       
     }
 }

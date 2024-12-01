@@ -29,6 +29,10 @@ namespace ProniaMVC.Controllers
                 .Include(p=>p.Category)
                 .Include(p=>p.Tags)
                 .ThenInclude(t=>t.Tag)
+                .Include(p=>p.ProductColors)
+                .ThenInclude(pc=>pc.Color)
+                .Include(p=>p.ProductSizes)
+                .ThenInclude(ps=>ps.Size)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product is null) return NotFound();

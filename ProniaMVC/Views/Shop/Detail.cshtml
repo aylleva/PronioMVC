@@ -97,18 +97,19 @@
                         <div class="selector-wrap color-option">
                             <span class="selector-title border-bottom-0">Color</span>
                             <select class="nice-select wide border-bottom-0 rounded-0">
-                                <option value="default">Black & White</option>
-                                <option value="blue">Blue</option>
-                                <option value="green">Green</option>
-                                <option value="red">Red</option>
+                                @foreach(var color in Model.Product.ProductColors){
+                                    <option value="@color.ColorId">@color.Color.Name</option>
+                                }
+                                <option disabled selected>Choose a Color</option>
                             </select>
                         </div>
                         <div class="selector-wrap size-option">
                             <span class="selector-title">Size</span>
                             <select class="nice-select wide rounded-0">
-                                <option value="medium">Medium Size & Poot</option>
-                                <option value="large">Large Size With Poot</option>
-                                <option value="small">Small Size With Poot</option>
+                               @foreach(var size in Model.Product.ProductSizes){
+                                    <option value="@size.SizeId">@size.Size.Name</option>
+                               }
+                                <option disabled selected>Choose a Size</option>
                             </select>
                         </div>
                         <p class="short-desc">
@@ -197,7 +198,7 @@
                             <ul>
                               @foreach(var tag in Model.Product.Tags){
                                     <li>
-                                        <a href="#">@string.Join(",",tag.Tag.Name)</a>
+                                        <a href="#">@string.Join("-",tag.Tag.Name)</a>
                                     </li>
                               }
                             </ul>

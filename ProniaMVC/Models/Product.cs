@@ -1,4 +1,5 @@
 ﻿using ProniaMVC.Models.Base;
+using ProniaMVC.Models.Base;
 
 namespace ProniaMVC.Models
 {
@@ -14,5 +15,8 @@ namespace ProniaMVC.Models
         public List<ProductImage> ProductImages { get; set; }
 
         public List<ProductTags> Tags { get; set; }
+
+        public List<ProductSizes> ProductSizes { get; set; }
+        public List<ProductColors> ProductColors { get; set; }
     }
 }
