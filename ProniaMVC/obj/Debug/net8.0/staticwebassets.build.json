@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JoJUJadqYjCz2+FduMs5wKxcjxfZ20J1WWyPcj8GkXM=",
+  "Hash": "70cQMXHtzoTHGMgsiWAq5Kh4pXG841XhcgWCdBr+7Uk=",
   "Source": "ProniaMVC",
   "BasePath": "_content/ProniaMVC",
   "Mode": "Default",
@@ -4992,27 +4992,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\2-2-70x78.png"
-    },
-    {
-      "Identity": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\2-3-70x78.png",
-      "SourceId": "ProniaMVC",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\",
-      "BasePath": "_content/ProniaMVC",
-      "RelativePath": "assets/images/website-images/2-3-70x78#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "6cjgio5il4",
-      "Integrity": "Grj25Ra35/uNuquB4GYAENbdvD8LlUUtnkAWY8G73uw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\2-3-70x78.png"
     },
     {
       "Identity": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\3.png",
@@ -25644,88 +25623,6 @@
         {
           "Name": "integrity",
           "Value": "sha256-J5t0iUHIQyhFKB6sP95mePQWvXyg1jl7z7+VNtnXpxA="
-        }
-      ]
-    },
-    {
-      "Route": "assets/images/website-images/2-3-70x78.6cjgio5il4.png",
-      "AssetFile": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\2-3-70x78.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2668"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Grj25Ra35/uNuquB4GYAENbdvD8LlUUtnkAWY8G73uw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 23 May 2022 07:25:50 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "6cjgio5il4"
-        },
-        {
-          "Name": "label",
-          "Value": "assets/images/website-images/2-3-70x78.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Grj25Ra35/uNuquB4GYAENbdvD8LlUUtnkAWY8G73uw="
-        }
-      ]
-    },
-    {
-      "Route": "assets/images/website-images/2-3-70x78.png",
-      "AssetFile": "C:\\Users\\user\\Desktop\\MVC projects\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\2-3-70x78.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2668"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Grj25Ra35/uNuquB4GYAENbdvD8LlUUtnkAWY8G73uw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 23 May 2022 07:25:50 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-Grj25Ra35/uNuquB4GYAENbdvD8LlUUtnkAWY8G73uw="
         }
       ]
     },

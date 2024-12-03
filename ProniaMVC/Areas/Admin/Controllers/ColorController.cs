@@ -98,6 +98,18 @@ namespace ProniaMVC.Areas.Admin.Controllers
             existed.Name = colorvm.Name;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }    
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null || id < 1) return BadRequest();
+            Color color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id);
+            if (color == null) return NotFound();
+
+            color.IsDeleted = true;
+            _context.Colors.Remove(color);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

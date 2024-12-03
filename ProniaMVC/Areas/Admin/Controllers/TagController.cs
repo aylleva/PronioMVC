@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.PointsToAnalysis;
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.Areas.Admin.ViewModels;
 using ProniaMVC.DAL;
@@ -25,7 +26,9 @@ namespace ProniaMVC.Areas.Admin.Controllers
              .Select(t=> new GetTagVM 
              {
                  Id=t.Id,   
-                 Name=t.Name
+                 Name=t.Name,
+                
+                 
 
              }).ToListAsync();
 
@@ -100,6 +103,17 @@ namespace ProniaMVC.Areas.Admin.Controllers
 
             await _context.SaveChangesAsync();
 
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null || id < 1) return BadRequest();
+            Tag tag = await _context.Tags.FirstOrDefaultAsync(tag => tag.Id==id);
+            if (tag == null) return NotFound();
+
+            tag.IsDeleted = true;
+            _context.Tags.Remove(tag);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

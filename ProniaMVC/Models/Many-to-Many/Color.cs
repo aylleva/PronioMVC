@@ -7,7 +7,7 @@ public class Color : BaseEntity
 {
   
     public string Name { get; set; }
-    public List<ProductSizes> ProductColors { get; set; }
+    public List<ProductColors> ProductColors { get; set; }
 
 }
 

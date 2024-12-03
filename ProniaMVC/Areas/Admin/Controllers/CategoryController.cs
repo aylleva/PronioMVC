@@ -96,17 +96,6 @@ namespace ProniaMVC.Areas.Admin.Controllers
 
         }
 
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || id < 1) return BadRequest();
-
-            Category category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
-            if (category == null) return NotFound();
-
-            category.IsDeleted = true;
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
 
         public async Task<IActionResult> Detail(int? id)

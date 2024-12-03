@@ -6,6 +6,12 @@ namespace ProniaMVC.Areas.Admin.ViewModels
 {
     public class UpdateProductVM
     {
+        public IFormFile? MainPhoto { get; set; }
+        public IFormFile? HoverPhoto { get; set; }
+
+        public List<IFormFile>? AdditionalPhotos { get; set; }
+        public List<ProductImage>? ProductImages { get; set; }
+        public List<int> ImageIds { get; set; } 
         public string Name { get; set; }
 
         [Required]

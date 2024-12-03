@@ -1,65 +1,116 @@
 ﻿@using ProniaMVC.Models.Base
 @model UpdateProductVM
+
+@{
+	ProductImage main = Model.ProductImages.FirstOrDefault(p => p.IsPrimary == true);
+	ProductImage hover = Model.ProductImages.FirstOrDefault(p => p.IsPrimary == false);
+}
 <div class="row">
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Update a Product</h4>
+	<div class="col-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Update a Product</h4>
 
-                <form class="forms-sample" method="post" >
-                    <div class="form-group">
-                        <label asp-for="Name">Name</label>
-                        <input asp-for=Name class="form-control" placeholder="Name">
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Price">Price</label>
-                        <input asp-for=Price class="form-control" placeholder="Price">
-                        <span asp-validation-for="Price" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="SKU">SKU</label>
-                        <input asp-for=SKU class="form-control" placeholder="SKU">
-                        <span asp-validation-for="SKU" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="CategoryId">Category</label>
-                        <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(Model.Categories,nameof(Category.Id),nameof(Category.Name))">
+				<form class="forms-sample" method="post">
+					<div class="form-group">
+						<img style="width:130px;height:130px" src="~/assets/images/website-images/@main?.Image">
+						<br>
+						<label asp-for="MainPhoto">Main Photo</label>
+						<input asp-for=MainPhoto class="form-control">
+						<span asp-validation-for="MainPhoto" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<img style="width:130px;height:130px" src="~/assets/images/website-images/@hover?.Image">
+						<br>
+						<label asp-for="HoverPhoto">Second Photo</label>
+						<input asp-for=HoverPhoto class="form-control">
+						<span asp-validation-for="HoverPhoto" class="text-danger"></span>
+					</div>
+					<div class="form-group d-flex">
+						@foreach (var photo in Model.ProductImages.Where(p => p.IsPrimary == null).ToList())
+						{
+							<div class="position-relative">
+								<img style="width:130px;height:130px" src="~/assets/images/website-images/@photo.Image">
+								<button class="delete-button btn-danger position-absolute" type="button" style="top:5px;right:5px;">X</button>
+								<input asp-for=ImageIds value="@photo.Id" type="hidden" class="form-control" placeholder="Name">
 
-                            @*   <option selected disabled value="">Choose a Category</option> *@
-                        </select>
-                        <span asp-validation-for="CategoryId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ColorIds">Choose Colors</label>
-                        <select asp-for="ColorIds" class="form-control" asp-items="new SelectList(Model.Colors,nameof(Color.Id),nameof(Color.Name))">
-                        </select>
-                        <span asp-validation-for="ColorIds" class="text-danger"></span>
-                    </div>
+							</div>
 
-                    <div class="form-group">
-                        <label asp-for="SizeIds">Choose Sizes</label>
-                        <select asp-for="SizeIds" class="form-control" asp-items="new SelectList(Model.Sizes,nameof(Size.Id),nameof(Size.Name))">
-                        </select>
-                        <span asp-validation-for="SizeIds" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="TagIds">Tags</label>
-                        <select asp-for="TagIds" class="form-control" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))">
-                        </select>
-                        <span asp-validation-for="TagIds" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputName1">Description</label>
-                        <textarea asp-for=Description class="form-control" placeholder="Description"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
+						}
+					</div>
+					<div class="form-group">
+						<label asp-for="AdditionalPhotos"> Additional Photos</label>
+						<input asp-for=AdditionalPhotos class="form-control">
+						<span asp-validation-for="AdditionalPhotos" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Name">Name</label>
+						<input asp-for=Name class="form-control" placeholder="Name">
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Price">Price</label>
+						<input asp-for=Price class="form-control" placeholder="Price">
+						<span asp-validation-for="Price" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="SKU">SKU</label>
+						<input asp-for=SKU class="form-control" placeholder="SKU">
+						<span asp-validation-for="SKU" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="CategoryId">Category</label>
+						<select asp-for="CategoryId" class="form-control" asp-items="new SelectList(Model.Categories,nameof(Category.Id),nameof(Category.Name))">
 
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <a asp-action="index" class="btn btn-light">Cancel</a>
-                </form>
-            </div>
-        </div>
-    </div>
+							@*   <option selected disabled value="">Choose a Category</option> *@
+						</select>
+						<span asp-validation-for="CategoryId" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="ColorIds">Choose Colors</label>
+						<select asp-for="ColorIds" class="form-control" asp-items="new SelectList(Model.Colors,nameof(Color.Id),nameof(Color.Name))">
+						</select>
+						<span asp-validation-for="ColorIds" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label asp-for="SizeIds">Choose Sizes</label>
+						<select asp-for="SizeIds" class="form-control" asp-items="new SelectList(Model.Sizes,nameof(Size.Id),nameof(Size.Name))">
+						</select>
+						<span asp-validation-for="SizeIds" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="TagIds">Tags</label>
+						<select asp-for="TagIds" class="form-control" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))">
+						</select>
+						<span asp-validation-for="TagIds" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName1">Description</label>
+						<textarea asp-for=Description class="form-control" placeholder="Description"></textarea>
+						<span asp-validation-for="Description" class="text-danger"></span>
+					</div>
+
+					<button type="submit" class="btn btn-primary me-2">Submit</button>
+					<a asp-action="index" class="btn btn-light">Cancel</a>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
+
+@section DeleteButton {
+	<script>
+
+		var button=document.querySelectorAll(".delete-button")
+
+		for(let i=0;i<button.length;i++){
+			button[i].addEventListener("click",function(){
+				button[i].parentElement.remove();
+
+			})
+		}
+
+	</script>
+}
 

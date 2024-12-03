@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.Areas.Admin.ViewModels.Sizes;
 using ProniaMVC.DAL;
+using ProniaMVC.Models;
 using ProniaMVC.Models.Base;
 
 namespace ProniaMVC.Areas.Admin.Controllers
@@ -97,6 +98,17 @@ namespace ProniaMVC.Areas.Admin.Controllers
 
             existed.Name=sizeVM.Name;
 
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null || id < 1) return BadRequest();
+            Size size = await context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
+            if (size == null) return NotFound();
+
+            size.IsDeleted = true;
+            context.Sizes.Remove(size);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

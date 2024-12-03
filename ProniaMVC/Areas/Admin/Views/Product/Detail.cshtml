@@ -1,0 +1,44 @@
+﻿@using ProniaMVC.Areas.Admin.ViewModels.Product
+@model DetailProductVM
+
+<div style="display:flex;">
+
+	<div class="card" style="width:15rem; display:flex; flex-direction:column;">
+		<img src="~/assets/images/website-images/@Model.Image" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">@Model.Name</h5>
+			<p class="card-text">Price:€@Model.Price</p>
+			<p class="card-text">Product Code:@Model.SKU</p>
+			<div class="selector-wrap color-option">
+				<span class="selector-title border-bottom-0">Tags:</span>
+				<select style="width:70px; height:20px;" class="nice-select wide border-bottom-0 rounded-0">
+					@foreach (var color in Model.Tags)
+					{
+						<option value="@color.TagId">@color.Tag.Name</option>
+					}
+				</select>
+			</div>	<br>
+			<div class="selector-wrap color-option">
+				<span class="selector-title border-bottom-0">Colors:</span>
+				<select style="width:70px; height:20px;" class="nice-select wide border-bottom-0 rounded-0">
+					@foreach (var color in Model.Colors)
+					{
+						<option value="@color.ColorId">@color.Color.Name</option>
+					}
+				</select>
+			</div>
+			<br>
+			<div class="selector-wrap color-option">
+				<span class="selector-title border-bottom-0"> Sizes:</span>
+				<select style="width:70px; height:20px;" class="nice-select wide border-bottom-0 rounded-0">
+					@foreach (var color in Model.Sizes)
+					{
+						<option value="@color.SizeId">@color.Size.Name</option>
+					}
+				</select>
+			</div>
+		
+		</div>
+	</div>
+
+</div>

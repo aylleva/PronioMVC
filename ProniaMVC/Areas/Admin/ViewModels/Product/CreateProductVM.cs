@@ -13,7 +13,7 @@ namespace ProniaMVC.Areas.Admin.ViewModels
         public IFormFile MainPhoto { get; set; }
         public IFormFile HoverPhoto { get; set; }
 
-        public List<IFormFile> AllPhotos { get; set; }
+        public List<IFormFile> AdditionalPhotos { get; set; }
         public string Name { get; set; }
 
         [Required]
