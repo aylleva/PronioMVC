@@ -227,8 +227,6 @@ wwwroot\assets\images\website-images\1-4-770x300.jpg
 wwwroot\assets\images\website-images\1-5.png
 wwwroot\assets\images\website-images\1-5-270x300.jpg
 wwwroot\assets\images\website-images\1-6-270x300.jpg
-wwwroot\assets\images\website-images\1-7-270x300.jpg
-wwwroot\assets\images\website-images\1-8-270x300.jpg
 wwwroot\assets\images\website-images\1-9-270x300.jpg
 wwwroot\assets\images\website-images\2.png
 wwwroot\assets\images\website-images\2-1-370x270.webp

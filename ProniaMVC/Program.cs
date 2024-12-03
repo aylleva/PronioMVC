@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.DAL;
+using ProniaMVC.Models;
 
 namespace ProniaMVC
 {
@@ -16,8 +18,25 @@ namespace ProniaMVC
             
             );
 
+            builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
+            {
+                opt.Password.RequiredLength = 8;
+                opt.Password.RequireNonAlphanumeric = false;
+
+                opt.User.RequireUniqueEmail = true;
+
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                opt.Lockout.MaxFailedAccessAttempts = 3;
+                opt.Lockout.AllowedForNewUsers = true;
+            }
+            ).AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
+
             var app = builder.Build();
             app.UseStaticFiles();
+
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllerRoute(
 

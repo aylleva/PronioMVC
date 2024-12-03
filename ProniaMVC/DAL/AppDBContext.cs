@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProniaMVC.Models;
 using ProniaMVC.Models.Base;
 
 namespace ProniaMVC.DAL
 {
-    public class AppDBContext:DbContext
+    public class AppDBContext:IdentityDbContext<AppUser>
     {
         public AppDBContext(DbContextOptions<AppDBContext> options):base(options) { }
         
