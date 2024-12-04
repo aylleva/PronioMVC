@@ -138,7 +138,7 @@
                                                     <a class="dropdown-item" asp-controller="account" asp-action="login" >Login</a>
                                                 </li>
                                                 <li>
-                                                        <a class="dropdown-item" h asp-controller="account" asp-action="register"> Register</a>
+                                                        <a class="dropdown-item" h asp-controller="account" asp-action="register" asp-route-returnurl="@Context.Request.Path.Value"> Register</a>
                                                 </li>
                                                }
                                                 

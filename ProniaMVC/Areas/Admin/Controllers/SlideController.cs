@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.Areas.Admin.ViewModels;
 using ProniaMVC.DAL;
@@ -9,6 +10,7 @@ using ProniaMVC.Utilitie.Extentions;
 namespace ProniaMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles ="Admin")]
     public class SlideController : Controller
     {
         

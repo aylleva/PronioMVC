@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using ProniaMVC.Areas.Admin.ViewModels;
@@ -11,6 +12,7 @@ using ProniaMVC.Utilitie.Extentions;
 namespace ProniaMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles ="Admin")]
     public class ProductController : Controller
     {
         private readonly AppDBContext _context;
