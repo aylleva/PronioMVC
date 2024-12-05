@@ -133,14 +133,14 @@ namespace ProniaMVC.Areas.Admin.Controllers
 
             ProductImage main = new()
             {
-                Image = await productvm.MainPhoto.CreateFileAsync(root),
+                Image = await productvm.MainPhoto.CreateFileAsync(_env.WebRootPath,root),
                 IsDeleted = false,
                 IsPrimary = true,
                 DateTime = DateTime.Now
             };
             ProductImage hover = new()
             {
-                Image = await productvm.HoverPhoto.CreateFileAsync(root),
+                Image = await productvm.HoverPhoto.CreateFileAsync(_env.WebRootPath, root),
                 IsDeleted = false,
                 IsPrimary = true,
                 DateTime = DateTime.Now
@@ -162,16 +162,16 @@ namespace ProniaMVC.Areas.Admin.Controllers
             };
             if(productvm.Tagids != null)
             {
-               product.Tags=productvm.Tags.Select(t=>new ProductTags {TagId=t.Id}).ToList();
+               product.Tags=productvm.Tagids.Select(t=>new ProductTags {TagId=t}).ToList();
             }
 
-            if(productvm.Colors != null)
+            if(productvm.ColorIds != null)
             {
-                product.ProductColors=productvm.Colors.Select(c=>new ProductColors { ColorId=c.Id}).ToList();
+                product.ProductColors=productvm.ColorIds.Select(c=>new ProductColors { ColorId=c}).ToList();
             }
-            if (productvm.Sizes != null)
+            if (productvm.SizeIds != null)
             {
-                product.ProductSizes= productvm.Sizes.Select(s => new ProductSizes { SizeId = s.Id }).ToList();
+                product.ProductSizes= productvm.SizeIds.Select(s => new ProductSizes { SizeId = s}).ToList();
             }
 
             if(productvm.AdditionalPhotos is not null)
@@ -247,14 +247,17 @@ namespace ProniaMVC.Areas.Admin.Controllers
         public async Task<IActionResult> Update(int? id, UpdateProductVM productVM)
         {
             if (id == 0 || id < 1) return BadRequest();
+            Product existed = await _context.Products.Include(p => p.ProductImages).Include(p => p.Tags).Include(p => p.ProductColors).Include(p => p.ProductSizes).FirstOrDefaultAsync(c => c.Id == id);
+            if (existed == null) return NotFound();
+
 
             productVM.Colors = await _context.Colors.ToListAsync();
             productVM.Sizes= await _context.Sizes.ToListAsync();
             productVM.Categories = await _context.Categories.ToListAsync();
             productVM.Tags = await _context.Tags.ToListAsync();
-
-            Product existed = await _context.Products.Include(p=>p.ProductImages).Include(p=>p.Tags).Include(p=>p.ProductColors).Include(p=>p.ProductSizes).FirstOrDefaultAsync(c => c.Id == id);
-            if (existed == null) return NotFound();
+            productVM.ProductImages = existed.ProductImages;
+          
+            
 
            
        
@@ -435,7 +438,10 @@ namespace ProniaMVC.Areas.Admin.Controllers
                 });
             }
           
-
+            if(productVM.ImageIds is null)
+            {
+                productVM.ImageIds = new List<int>();
+            }
             var deletedfiles = existed.ProductImages.Where(pi => !productVM.ImageIds.Exists(i => i == pi.Id) && pi.IsPrimary==null);
             foreach (var file in deletedfiles)
             {

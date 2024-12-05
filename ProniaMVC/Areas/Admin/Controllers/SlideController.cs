@@ -35,6 +35,10 @@ namespace ProniaMVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateSlideVM slideVM)
         {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
             if (!slideVM.Photo.CheckType("image/"))
             {
                 ModelState.AddModelError("Photo", "Wrong Format!");

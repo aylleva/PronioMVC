@@ -22,5 +22,7 @@ namespace ProniaMVC.DAL
         public DbSet<ProductColors> ProductColors { get; set; }
         public DbSet<Size> Sizes { get; set; }  
         public DbSet<ProductSizes> ProductSizes { get; set; }
+
+        public DbSet<Setting> Settings { get; set; } 
     }
 }

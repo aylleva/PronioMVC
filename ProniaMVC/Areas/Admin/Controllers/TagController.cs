@@ -11,12 +11,12 @@ namespace ProniaMVC.Areas.Admin.Controllers
     public class TagController : Controller
     {
         private readonly AppDBContext _context;
-        private readonly IWebHostEnvironment _env;
+      
 
-        public TagController(AppDBContext context,IWebHostEnvironment env)
+        public TagController(AppDBContext context)
         {
            _context = context;
-            _env = env;
+          
         }
         public async Task<IActionResult> Index()
         

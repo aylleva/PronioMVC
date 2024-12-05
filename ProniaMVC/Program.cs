@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.DAL;
 using ProniaMVC.Models;
+using ProniaMVC.Services.Implementations;
+using ProniaMVC.Services.Interfaces;
 
 namespace ProniaMVC
 {
@@ -31,6 +33,7 @@ namespace ProniaMVC
             }
             ).AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
 
+            builder.Services.AddScoped<ILayoutServices,LayoutServices>();
             var app = builder.Build();
             app.UseStaticFiles();
 
