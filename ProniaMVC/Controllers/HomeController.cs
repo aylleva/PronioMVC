@@ -24,10 +24,16 @@ namespace ProniaMVC.Controllers
                 .ToListAsync(),
 
                 Products=await _context.Products
-                //.Take(7)
-                .Include(img => img.ProductImages/*.Where(pi => pi.IsPrimary != null)*/)
+                .Take(8)
+                .Include(img => img.ProductImages.Where(pi => pi.IsPrimary != null))
                 .ToListAsync(), 
-            };
+
+                NewProducts= await _context.Products
+                .OrderByDescending(p=>p.DateTime)
+                .Take(8)
+                .Include(img => img.ProductImages.Where(pi => pi.IsPrimary != null))
+                .ToListAsync()
+                };
             return View(vm);  
         }
     }

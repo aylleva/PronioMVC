@@ -41,6 +41,8 @@ namespace ProniaMVC.Controllers
                 Surname = uservm.Surname,
                 UserName = uservm.UserName,
             };
+
+            
             var result = await _usernmanager.CreateAsync(user, uservm.Password);
 
             if(!result.Succeeded)

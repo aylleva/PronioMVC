@@ -25,6 +25,7 @@ namespace ProniaMVC
                 opt.Password.RequiredLength = 8;
                 opt.Password.RequireNonAlphanumeric = false;
 
+                
                 opt.User.RequireUniqueEmail = true;
 
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
