@@ -1,8 +1,12 @@
 ﻿@using ProniaMVC.Services.Interfaces
+@using ProniaMVC.ViewModels
 @inject ILayoutServices _layoutsetting
 
 @{
     Dictionary<string, string> settings = await _layoutsetting.GetSettingsAsync();
+    List<BasketItemVM> basketItem = await _layoutsetting.GetBasketAsync();
+
+    decimal total = 0;
 }
 <!DOCTYPE html>
 <html lang="zxx">
@@ -12,12 +16,12 @@
     <title>Pronia - Plant Store Bootstrap 5 Template</title>
     <meta name="robots" content="index, follow" />
     <meta name="description"
-          content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop." />
+    content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Favicon -->
     <link rel="shortcut icon"
-          type="image/x-icon"
-          href="~/assets/images/favicon.ico" />
+    type="image/x-icon"
+    href="~/assets/images/favicon.ico" />
 
     <!-- CSS
     ============================================ -->
@@ -61,30 +65,30 @@
                                 <ul class="dropdown-wrap">
                                     <li class="dropdown">
                                         <button class="btn btn-link dropdown-toggle ht-btn"
-                                                type="button"
-                                                id="currencyButton"
-                                                data-bs-toggle="dropdown"
-                                                aria-label="currency"
-                                                aria-expanded="false">
+                                        type="button"
+                                        id="currencyButton"
+                                        data-bs-toggle="dropdown"
+                                        aria-label="currency"
+                                        aria-expanded="false">
                                             USD
                                         </button>
                                         <ul class="dropdown-menu"
-                                            aria-labelledby="currencyButton">
+                                        aria-labelledby="currencyButton">
                                             <li><a class="dropdown-item" href="#">GBP</a></li>
                                             <li><a class="dropdown-item" href="#">ISO</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
                                         <button class="btn btn-link dropdown-toggle ht-btn"
-                                                type="button"
-                                                id="languageButton"
-                                                data-bs-toggle="dropdown"
-                                                aria-label="language"
-                                                aria-expanded="false">
+                                        type="button"
+                                        id="languageButton"
+                                        data-bs-toggle="dropdown"
+                                        aria-label="language"
+                                        aria-expanded="false">
                                             English
                                         </button>
                                         <ul class="dropdown-menu"
-                                            aria-labelledby="languageButton">
+                                        aria-labelledby="languageButton">
                                             <li><a class="dropdown-item" href="#">French</a></li>
                                             <li><a class="dropdown-item" href="#">Italian</a></li>
                                             <li><a class="dropdown-item" href="#">Spanish</a></li>
@@ -102,7 +106,7 @@
                         <div class="col-lg-12">
                             <div class="header-middle-wrap position-relative">
                                 <div class="header-contact d-none d-lg-flex">
-                                   
+
                                     <a >@settings["Number"]</a>
                                 </div>
 
@@ -114,23 +118,23 @@
                                     <ul>
                                         <li>
                                             <a href="#exampleModal"
-                                               class="search-btn bt"
-                                               data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal">
-                                               @Html.Raw(settings["Icon1"])
+                                            class="search-btn bt"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                                @Html.Raw(settings["Icon1"])
                                             </a>
                                         </li>
                                         <li class="dropdown d-none d-lg-block">
                                             <button class="btn btn-link dropdown-toggle ht-btn p-0"
-                                                    type="button"
-                                                    id="settingButton"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-label="setting"
-                                                    aria-expanded="false">
+                                            type="button"
+                                            id="settingButton"
+                                            data-bs-toggle="dropdown"
+                                            aria-label="setting"
+                                            aria-expanded="false">
                                                 @Html.Raw(settings["Icon2"])
                                             </button>
                                             <ul class="dropdown-menu"
-                                                aria-labelledby="settingButton">
+                                            aria-labelledby="settingButton">
                                                 @if(User.Identity.IsAuthenticated){
                                                     <li>
                                                         <a class="dropdown-item">@User.Identity.Name</a>
@@ -139,15 +143,15 @@
                                                         <a class="dropdown-item" asp-controller="account" asp-action="logout" >LogOut</a>
                                                     </li>
                                                 }
-                                               else{
+                                                else{
                                                     <li>
-                                                    <a class="dropdown-item" asp-controller="account" asp-action="login" >Login</a>
-                                                </li>
-                                                <li>
+                                                        <a class="dropdown-item" asp-controller="account" asp-action="login" >Login</a>
+                                                    </li>
+                                                    <li>
                                                         <a class="dropdown-item" h asp-controller="account" asp-action="register" asp-route-returnurl="@Context.Request.Path.Value"> Register</a>
-                                                </li>
-                                               }
-                                                
+                                                    </li>
+                                                }
+
                                             </ul>
                                         </li>
                                         <li class="d-none d-lg-block">
@@ -158,12 +162,12 @@
                                         <li class="minicart-wrap me-3 me-lg-0">
                                             <a href="#miniCart" class="minicart-btn toolbar-btn">
                                                 @Html.Raw(settings["Icon4"])
-                                                <span class="quantity">3</span>
+                                                <span class="quantity">@basketItem.Count</span>
                                             </a>
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
                                             <a href="#mobileMenu"
-                                               class="mobile-menu_btn toolbar-btn pl-0">
+                                            class="mobile-menu_btn toolbar-btn pl-0">
                                                 <i class="pe-7s-menu"></i>
                                             </a>
                                         </li>
@@ -436,23 +440,23 @@
                                     <ul>
                                         <li>
                                             <a href="#exampleModal"
-                                               class="search-btn bt"
-                                               data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal">
+                                            class="search-btn bt"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
                                                 <i class="pe-7s-search"></i>
                                             </a>
                                         </li>
                                         <li class="dropdown d-none d-lg-block">
                                             <button class="btn btn-link dropdown-toggle ht-btn p-0"
-                                                    type="button"
-                                                    id="stickysettingButton"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-label="setting"
-                                                    aria-expanded="false">
+                                            type="button"
+                                            id="stickysettingButton"
+                                            data-bs-toggle="dropdown"
+                                            aria-label="setting"
+                                            aria-expanded="false">
                                                 <i class="pe-7s-users"></i>
                                             </button>
                                             <ul class="dropdown-menu"
-                                                aria-labelledby="stickysettingButton">
+                                            aria-labelledby="stickysettingButton">
                                                 <li>
                                                     <a class="dropdown-item" href="my-account.html">My account</a>
                                                 </li>
@@ -474,7 +478,7 @@
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
                                             <a href="#mobileMenu"
-                                               class="mobile-menu_btn toolbar-btn pl-0">
+                                            class="mobile-menu_btn toolbar-btn pl-0">
                                                 <i class="pe-7s-menu"></i>
                                             </a>
                                         </li>
@@ -499,14 +503,14 @@
                             <ul class="dropdown-wrap">
                                 <li class="dropdown dropdown-left">
                                     <button class="btn btn-link dropdown-toggle ht-btn"
-                                            type="button"
-                                            id="languageButtonTwo"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
+                                    type="button"
+                                    id="languageButtonTwo"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                         English
                                     </button>
                                     <ul class="dropdown-menu"
-                                        aria-labelledby="languageButtonTwo">
+                                    aria-labelledby="languageButtonTwo">
                                         <li><a class="dropdown-item" href="#">French</a></li>
                                         <li><a class="dropdown-item" href="#">Italian</a></li>
                                         <li><a class="dropdown-item" href="#">Spanish</a></li>
@@ -514,28 +518,28 @@
                                 </li>
                                 <li class="dropdown">
                                     <button class="btn btn-link dropdown-toggle ht-btn usd-dropdown"
-                                            type="button"
-                                            id="currencyButtonTwo"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
+                                    type="button"
+                                    id="currencyButtonTwo"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                         USD
                                     </button>
                                     <ul class="dropdown-menu"
-                                        aria-labelledby="currencyButtonTwo">
+                                    aria-labelledby="currencyButtonTwo">
                                         <li><a class="dropdown-item" href="#">GBP</a></li>
                                         <li><a class="dropdown-item" href="#">ISO</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
                                     <button class="btn btn-link dropdown-toggle ht-btn p-0"
-                                            type="button"
-                                            id="settingButtonTwo"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
+                                    type="button"
+                                    id="settingButtonTwo"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                         <i class="pe-7s-users"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="settingButtonTwo">
+                                    aria-labelledby="settingButtonTwo">
                                         <li>
                                             <a class="dropdown-item" href="my-account.html">My account</a>
                                         </li>
@@ -772,23 +776,23 @@
                 </div>
             </div>
             <div class="modal fade"
-                 id="exampleModal"
-                 tabindex="-1"
-                 aria-labelledby="exampleModal"
-                 aria-hidden="true">
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModal"
+            aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
                     <div class="modal-content modal-bg-dark">
                         <div class="modal-header">
                             <button type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                    data-tippy="Close"
-                                    data-tippy-inertia="true"
-                                    data-tippy-animation="shift-away"
-                                    data-tippy-delay="50"
-                                    data-tippy-arrow="true"
-                                    data-tippy-theme="sharpborder"></button>
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            data-tippy="Close"
+                            data-tippy-inertia="true"
+                            data-tippy-animation="shift-away"
+                            data-tippy-delay="50"
+                            data-tippy-arrow="true"
+                            data-tippy-theme="sharpborder"></button>
                         </div>
                         <div class="modal-body">
                             <div class="modal-search">
@@ -798,14 +802,14 @@
                                 </span>
                                 <form action="#" class="hm-searchbox">
                                     <input type="text"
-                                           name="Search..."
-                                           value="Search..."
-                                           onblur="if(this.value==''){this.value='Search...'}"
-                                           onfocus="if(this.value=='Search...'){this.value=''}"
-                                           autocomplete="off" />
+                                    name="Search..."
+                                    value="Search..."
+                                    onblur="if(this.value==''){this.value='Search...'}"
+                                    onfocus="if(this.value=='Search...'){this.value=''}"
+                                    autocomplete="off" />
                                     <button class="search-btn"
-                                            type="submit"
-                                            aria-label="searchbtn">
+                                    type="submit"
+                                    aria-label="searchbtn">
                                         <i class="pe-7s-search"></i>
                                     </button>
                                 </form>
@@ -821,91 +825,60 @@
                             <h4 class="mb-0">Shopping Cart</h4>
                             <a href="#" class="button-close">
                                 <i class="pe-7s-close"
-                                   data-tippy="Close"
-                                   data-tippy-inertia="true"
-                                   data-tippy-animation="shift-away"
-                                   data-tippy-delay="50"
-                                   data-tippy-arrow="true"
-                                   data-tippy-theme="sharpborder"></i>
+                                data-tippy="Close"
+                                data-tippy-inertia="true"
+                                data-tippy-animation="shift-away"
+                                data-tippy-delay="50"
+                                data-tippy-arrow="true"
+                                data-tippy-theme="sharpborder"></i>
                             </a>
                         </div>
                         <ul class="minicart-list">
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#">
-                                    <i class="pe-7s-close"
-                                       data-tippy="Remove"
-                                       data-tippy-inertia="true"
-                                       data-tippy-animation="shift-away"
-                                       data-tippy-delay="50"
-                                       data-tippy-arrow="true"
-                                       data-tippy-theme="sharpborder"></i>
-                                </a>
-                                <a href="single-product-variable.html"
-                                   class="product-item_img">
-                                    <img class="img-full"
-                                         src="~/assets/images/product/small-size/2-1-70x78.png"
-                                         alt="Product Image" />
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title"
-                                       href="single-product-variable.html">American Marigold</a>
-                                    <span class="product-item_quantity">1 x $23.45</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#">
-                                    <i class="pe-7s-close"
-                                       data-tippy="Remove"
-                                       data-tippy-inertia="true"
-                                       data-tippy-animation="shift-away"
-                                       data-tippy-delay="50"
-                                       data-tippy-arrow="true"
-                                       data-tippy-theme="sharpborder"></i>
-                                </a>
-                                <a href="single-product-variable.html"
-                                   class="product-item_img">
-                                    <img class="img-full"
-                                         src="~/assets/images/product/small-size/2-2-70x78.png"
-                                         alt="Product Image" />
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title"
-                                       href="single-product-variable.html">Black Eyed Susan</a>
-                                    <span class="product-item_quantity">1 x $25.45</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#">
-                                    <i class="pe-7s-close"
-                                       data-tippy="Remove"
-                                       data-tippy-inertia="true"
-                                       data-tippy-animation="shift-away"
-                                       data-tippy-delay="50"
-                                       data-tippy-arrow="true"
-                                       data-tippy-theme="sharpborder"></i>
-                                </a>
-                                <a href="single-product-variable.html"
-                                   class="product-item_img">
-                                    <img class="img-full"
-                                         src="~/assets/images/product/small-size/2-3-70x78.png"
-                                         alt="Product Image" />
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title"
-                                       href="single-product-variable.html">Bleeding Heart</a>
-                                    <span class="product-item_quantity">1 x $30.45</span>
-                                </div>
-                            </li>
+                            @foreach(var item in basketItem){
+                                total += item.SubTotal;
+                                <li class="minicart-product">
+                                    <a class="product-item_remove" href="#">
+                                        <i class="pe-7s-close"
+                                           data-tippy="Remove"
+                                           data-tippy-inertia="true"
+                                           data-tippy-animation="shift-away"
+                                           data-tippy-delay="50"
+                                           data-tippy-arrow="true"
+                                           data-tippy-theme="sharpborder"></i>
+                                    </a>
+                                    <a href="single-product-variable.html"
+                                       class="product-item_img">
+                                        <img class="img-full"
+                                             src="~/assets/images/website-images/@item.Image"
+                                             alt="Product Image" />
+                                    </a>
+                                    <div class="product-item_content">
+                                        <a class="product-item_title"
+                                           href="single-product-variable.html">@item.Price</a>
+                                        <span class="product-item_quantity">@item.Count x $@item.Price
+                                        </span>
+                                    </div>
+                                </li>
+                         }
+                          
                         </ul>
                     </div>
-                    <div class="minicart-item_total">
-                        <span>Subtotal</span>
-                        <span class="ammount">$79.35</span>
-                    </div>
-                    <div class="group-btn_wrap d-grid gap-2">
-                        <a href="cart.html" class="btn btn-dark">View Cart</a>
-                        <a href="checkout.html" class="btn btn-dark">Checkout</a>
-                    </div>
+                  @if(basketItem.Count!=0){
+                        <div class="minicart-item_total">
+                            <span>Subtotal</span>
+                            <span class="ammount">$@total</span>
+                        </div>
+                        <div class="group-btn_wrap d-grid gap-2">
+                            <a asp-controller="basket" asp-action="index" class="btn btn-dark">View Cart</a>
+                            <a href="checkout.html" class="btn btn-dark">Checkout</a>
+                        </div>
+                  }
+                  else{
+                        <div class="group-btn_wrap d-grid gap-2">
+                            <span>Your Cart Is Empty</span>
+                            <a asp-controller="shop" asp-action="index" class="btn btn-dark">Shop Now!</a>
+                        </div>
+                  }
                 </div>
             </div>
             <div class="global-overlay"></div>
