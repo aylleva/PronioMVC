@@ -24,5 +24,7 @@ namespace ProniaMVC.DAL
         public DbSet<ProductSizes> ProductSizes { get; set; }
 
         public DbSet<Setting> Settings { get; set; } 
+
+        public DbSet<BasketItems> BasketItems { get; set; }
     }
 }

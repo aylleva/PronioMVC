@@ -343,8 +343,6 @@ namespace ProniaMVC.Areas.Admin.Controllers
             {
                 productVM.ColorIds = new();
             }
-           
-
             _context.ProductColors.RemoveRange(existed.ProductColors
               .Where(pc => !productVM.ColorIds
               .Exists(cI => cI == pc.ColorId)).ToList());
@@ -361,14 +359,10 @@ namespace ProniaMVC.Areas.Admin.Controllers
             {
                 productVM.SizeIds = new();
             }
-           
-
             _context.ProductSizes
               .RemoveRange(existed.ProductSizes
               .Where(pc => !productVM.SizeIds
               .Exists(cI => cI == pc.SizeId)).ToList());
-
-
 
             _context.ProductSizes
              .AddRange(productVM.SizeIds
@@ -387,8 +381,6 @@ namespace ProniaMVC.Areas.Admin.Controllers
                 {
                     productVM.TagIds = productVM.TagIds.Distinct().ToList();
                 }
-
-
                 _context.ProductTags
                 .RemoveRange(existed.Tags
                 .Where(t => !productVM.TagIds
