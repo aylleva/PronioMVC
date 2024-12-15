@@ -1,10 +1,11 @@
 ﻿@using ProniaMVC.Services.Interfaces
 @using ProniaMVC.ViewModels
 @inject ILayoutServices _layoutsetting
+@inject IBasketServices _basketservice
 
 @{
     Dictionary<string, string> settings = await _layoutsetting.GetSettingsAsync();
-    List<BasketItemVM> basketItem = await _layoutsetting.GetBasketAsync();
+    List<BasketItemVM> basketItem = await _basketservice.GetBasketAsync();
 
     decimal total = 0;
 }
@@ -20,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Favicon -->
    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> rel="stylesheet" />
+   
     <link rel="shortcut icon"
     type="image/x-icon"
     href="~/assets/images/favicon.ico" />
@@ -123,7 +124,7 @@
                                             class="search-btn bt"
                                             data-bs-toggle="modal"
                                             data-bs-target="#exampleModal">
-                                                @Html.Raw(settings["Icon1"])
+                                             @Html.Raw(settings["Icon1"])
                                             </a>
                                         </li>
                                         <li class="dropdown d-none d-lg-block">
@@ -157,7 +158,7 @@
                                             </ul>
                                         </li>
                                         <li class="d-none d-lg-block">
-                                            <a href="wishlist.html">
+                                            <a asp-controller="wishlist" asp-action="index">
                                                 @Html.Raw(settings["Icon3"])
                                             </a>
                                         </li>
@@ -188,7 +189,7 @@
                                 <nav class="main-nav">
                                     <ul>
                                         <li class="drop-holder">
-                                            <a href="index.html">Home</a>
+                                            <a asp-controller="home" asp-action="index">Home</a>
                                             <ul class="drop-menu">
                                                 <li>
                                                     <a href="index.html">Home One</a>
@@ -199,7 +200,7 @@
                                             </ul>
                                         </li>
                                         <li class="megamenu-holder">
-                                            <a href="shop.html">Shop</a>
+                                            <a  asp-controller="shop" asp-action="index">Shop</a>
                                             <ul class="drop-menu megamenu">
                                                 <li>
                                                     <span class="title">Shop Layout</span>
@@ -821,67 +822,7 @@
                 </div>
             </div>
             <div class="offcanvas-minicart_wrapper" id="miniCart">
-                <div class="offcanvas-body">
-                    <div class="minicart-content">
-                        <div class="minicart-heading">
-                            <h4 class="mb-0">Shopping Cart</h4>
-                            <a href="#" class="button-close">
-                                <i class="pe-7s-close"
-                                data-tippy="Close"
-                                data-tippy-inertia="true"
-                                data-tippy-animation="shift-away"
-                                data-tippy-delay="50"
-                                data-tippy-arrow="true"
-                                data-tippy-theme="sharpborder"></i>
-                            </a>
-                        </div>
-                        <ul class="minicart-list">
-                            @foreach(var item in basketItem){
-                                total += item.SubTotal;
-                                <li class="minicart-product">
-                                    <a class="product-item_remove" href="#">
-                                        <i class="pe-7s-close"
-                                           data-tippy="Remove"
-                                           data-tippy-inertia="true"
-                                           data-tippy-animation="shift-away"
-                                           data-tippy-delay="50"
-                                           data-tippy-arrow="true"
-                                           data-tippy-theme="sharpborder"></i>
-                                    </a>
-                                    <a href="single-product-variable.html"
-                                       class="product-item_img">
-                                        <img class="img-full"
-                                             src="~/assets/images/website-images/@item.Image"
-                                             alt="Product Image" />
-                                    </a>
-                                    <div class="product-item_content">
-                                        <a class="product-item_title"
-                                           href="single-product-variable.html">@item.Price</a>
-                                        <span class="product-item_quantity">@item.Count x $@item.Price
-                                        </span>
-                                    </div>
-                                </li>
-                         }
-                          
-                        </ul>
-                    </div>
-                  @if(basketItem.Count!=0){
-                        <div class="minicart-item_total">
-                            <span>Subtotal</span>
-                            <span class="ammount">$@total</span>
-                        </div>
-                        <div class="group-btn_wrap d-grid gap-2">
-                            <a asp-controller="basket" asp-action="index" class="btn btn-dark">View Cart</a>
-                            <a href="checkout.html" class="btn btn-dark">Checkout</a>
-                        </div>
-                  }
-                  else{
-                        <div class="group-btn_wrap d-grid gap-2">
-                            <span>Your Cart Is Empty</span>
-                            <a asp-controller="shop" asp-action="index" class="btn btn-dark">Shop Now!</a>
-                        </div>
-                  }
-                </div>
+              @Html.Partial("BasketPartialView",basketItem)
             </div>
             <div class="global-overlay"></div>
         </header>

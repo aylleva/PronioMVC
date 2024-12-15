@@ -17,7 +17,7 @@
                     <div class="product-add-action">
                         <ul>
                             <li>
-                                <a href="wishlist.html"
+                                <a asp-controller="wishlist" asp-action="addwishlist" asp-route-id="@product.Id"
                                    data-tippy="Add to wishlist"
                                    data-tippy-inertia="true"
                                    data-tippy-animation="shift-away"
@@ -41,7 +41,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a asp-action="addbasket" asp-controller="basket" asp-route-id="@product.Id"
+                                <a class="cus-add-basket" asp-action="addbasket" asp-controller="basket" asp-route-id="@product.Id"
                                    data-tippy="Add to cart"
                                    data-tippy-inertia="true"
                                    data-tippy-animation="shift-away"

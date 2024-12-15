@@ -35,6 +35,7 @@ namespace ProniaMVC
             ).AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
 
             builder.Services.AddScoped<ILayoutServices,LayoutServices>();
+            builder.Services.AddScoped<IBasketServices,BasketServices>();
             var app = builder.Build();
             app.UseStaticFiles();
 

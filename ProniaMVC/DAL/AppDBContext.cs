@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.Models;
 using ProniaMVC.Models.Base;
+using System.Numerics;
 
 namespace ProniaMVC.DAL
 {
@@ -26,5 +27,10 @@ namespace ProniaMVC.DAL
         public DbSet<Setting> Settings { get; set; } 
 
         public DbSet<BasketItems> BasketItems { get; set; }
+
+        public DbSet<WishListItems> WishListItems { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

@@ -8,5 +8,7 @@ namespace ProniaMVC.Models
         public string Surname {  get; set; }
 
         public List<BasketItems> BasketItems { get; set; }
+
+        public List<WishListItems> WishListItems { get; set; }
     }
 }

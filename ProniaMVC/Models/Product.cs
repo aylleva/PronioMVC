@@ -1,5 +1,5 @@
 ﻿using ProniaMVC.Models.Base;
-using ProniaMVC.Models.Base;
+
 
 namespace ProniaMVC.Models
 {

@@ -325,6 +325,76 @@ namespace ProniaMVC.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ProniaMVC.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Subtotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Userid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Userid");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("ProniaMVC.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Userid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("Userid");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("ProniaMVC.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -546,6 +616,30 @@ namespace ProniaMVC.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("ProniaMVC.Models.WishListItems", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("WishListItems");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -599,6 +693,40 @@ namespace ProniaMVC.Migrations
 
             modelBuilder.Entity("ProniaMVC.Models.BasketItems", b =>
                 {
+                    b.HasOne("ProniaMVC.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProniaMVC.Models.AppUser", "User")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("Userid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ProniaMVC.Models.Order", b =>
+                {
+                    b.HasOne("ProniaMVC.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Userid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ProniaMVC.Models.OrderItem", b =>
+                {
+                    b.HasOne("ProniaMVC.Models.Order", null)
+                        .WithMany("Orderitems")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("ProniaMVC.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -695,6 +823,32 @@ namespace ProniaMVC.Migrations
                     b.Navigation("Tag");
                 });
 
+            modelBuilder.Entity("ProniaMVC.Models.WishListItems", b =>
+                {
+                    b.HasOne("ProniaMVC.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProniaMVC.Models.AppUser", "User")
+                        .WithMany("WishListItems")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ProniaMVC.Models.AppUser", b =>
+                {
+                    b.Navigation("BasketItems");
+
+                    b.Navigation("WishListItems");
+                });
+
             modelBuilder.Entity("ProniaMVC.Models.Base.Color", b =>
                 {
                     b.Navigation("ProductColors");
@@ -708,6 +862,11 @@ namespace ProniaMVC.Migrations
             modelBuilder.Entity("ProniaMVC.Models.Category", b =>
                 {
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ProniaMVC.Models.Order", b =>
+                {
+                    b.Navigation("Orderitems");
                 });
 
             modelBuilder.Entity("ProniaMVC.Models.Product", b =>

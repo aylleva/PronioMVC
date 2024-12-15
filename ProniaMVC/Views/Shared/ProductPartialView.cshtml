@@ -19,7 +19,7 @@
                         <div class="product-add-action">
                             <ul>
                                 <li>
-                                    <a href="wishlist.html"
+                                    <a asp-controller="wishlist" asp-action="addwishlist" asp-route-id="@product.Id"
                                        data-tippy="Add to wishlist"
                                        data-tippy-inertia="true"
                                        data-tippy-animation="shift-away"
@@ -32,7 +32,7 @@
                                 <li class="quuickview-btn"
                                     data-bs-toggle="modal"
                                     data-bs-target="#quickModal">
-                                    <a href="#"
+                                    <a asp-controller="shop" asp-action="detail"
                                        data-tippy="Quickview"
                                        data-tippy-inertia="true"
                                        data-tippy-animation="shift-away"
@@ -43,7 +43,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-controller="basket" asp-action="addbasket" asp-route-id="@product.Id"
+                                    <a class="cus-add-basket" asp-controller="basket" asp-action="addbasket" asp-route-id="@product.Id"
                                        data-tippy="Add to cart"
                                        data-tippy-inertia="true"
                                        data-tippy-animation="shift-away"

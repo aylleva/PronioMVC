@@ -1,0 +1,69 @@
+﻿@model List<BasketItemVM>
+@{
+    decimal total = 0;
+}
+<div class="offcanvas-body">
+    <div class="minicart-content">
+        <div class="minicart-heading">
+            <h4 class="mb-0">Shopping Cart</h4>
+            <a href="#" class="button-close">
+                <i class="pe-7s-close"
+                   data-tippy="Close"
+                   data-tippy-inertia="true"
+                   data-tippy-animation="shift-away"
+                   data-tippy-delay="50"
+                   data-tippy-arrow="true"
+                   data-tippy-theme="sharpborder"></i>
+            </a>
+        </div>
+        <ul class="minicart-list">
+            @foreach (var item in Model)
+            {
+                total += item.SubTotal;
+                <li class="minicart-product">
+                    <a asp-controller="basket" asp-action="delete" asp-route-id="@item.Id">
+                        <i class="pe-7s-close"
+                           data-tippy="Remove"
+                           data-tippy-inertia="true"
+                           data-tippy-animation="shift-away"
+                           data-tippy-delay="50"
+                           data-tippy-arrow="true"
+                           data-tippy-theme="sharpborder"></i>
+                    </a>
+                    <a href="single-product-variable.html"
+                       class="product-item_img">
+                        <img class="img-full"
+                             src="~/assets/images/website-images/@item.Image"
+                             alt="Product Image" />
+                    </a>
+                    <div class="product-item_content">
+                        <a class="product-item_title"
+                           href="single-product-variable.html">@item.Price</a>
+                        <span class="product-item_quantity">
+                            @item.Count x $@item.Price
+                        </span>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </div>
+    @if (Model.Count != 0)
+    {
+        <div class="minicart-item_total">
+            <span>Subtotal</span>
+            <span class="ammount">$@total</span>
+        </div>
+        <div class="group-btn_wrap d-grid gap-2">
+            <a asp-controller="basket" asp-action="index" class="btn btn-dark">View Cart</a>
+            <a asp-controller="basket" asp-action="checkout" class="btn btn-dark">Checkout</a>
+        </div>
+    }
+    else
+    {
+        <div class="group-btn_wrap d-grid gap-2">
+            <span>Your Cart Is Empty</span>
+            <a asp-controller="shop" asp-action="index" class="btn btn-dark">Shop Now!</a>
+        </div>
+    }
+</div>
