@@ -16,7 +16,8 @@ namespace ProniaMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
+          
+           
                 HomeVM vm = new HomeVM {
                 Slides = await _context.Slides
                 .OrderBy(s=>s.Order)
@@ -36,5 +37,12 @@ namespace ProniaMVC.Controllers
                 };
             return View(vm);  
         }
+
+        public IActionResult Error(string errormessage)
+        {
+            return View(model:errormessage);
+        }
     }
+
+
 }

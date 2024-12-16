@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.DAL;
 using ProniaMVC.Models;
+using ProniaMVC.Utilitie.Exceptions;
 using ProniaMVC.ViewModels;
 
 namespace ProniaMVC.Controllers
@@ -22,7 +23,7 @@ namespace ProniaMVC.Controllers
 
         public async Task<IActionResult> Detail(int? id)
         {
-            if (id == null || id < 1) return BadRequest();
+            if (id == null || id < 1) throw new BadRequestException("Ups ERROR");
 
             Product? product =await _context.Products
                 .Include(p=>p.ProductImages.OrderByDescending(p=>p.IsPrimary))
@@ -35,7 +36,7 @@ namespace ProniaMVC.Controllers
                 .ThenInclude(ps=>ps.Size)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product is null) return NotFound();
+            if (product is null) throw new NotFountException($"Ups Not Found!!");
 
             DetailVM detailVM = new DetailVM
             {

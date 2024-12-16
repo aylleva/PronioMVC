@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ProniaMVC.DAL;
 using ProniaMVC.Models;
+using ProniaMVC.Utilitie.Exceptions;
 using ProniaMVC.ViewModels;
 using System.Security.Claims;
 
@@ -80,9 +81,9 @@ namespace ProniaMVC.Controllers
 
         public async Task<IActionResult> Addwishlist(int? id)
         {
-            if (id is null || id < 1) return BadRequest();
+            if (id is null || id < 1) throw new BadRequestException("Ups ERROR");
             bool result = await _context.Products.AnyAsync(p => p.Id == id);
-            if (!result) return NotFound();
+            if (!result) throw new NotFountException($"Ups Not Found!!");
 
             if (User.Identity.IsAuthenticated)
             {
@@ -125,9 +126,9 @@ namespace ProniaMVC.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id is null || id < 1) return BadRequest();
+            if (id is null || id < 1) throw new BadRequestException("Ups ERROR");
             bool result = await _context.Products.AnyAsync(p => p.Id == id);
-            if (!result) return NotFound();
+            if (!result) throw new NotFountException($"Ups Not Found!!");
 
             if (User.Identity.IsAuthenticated)
             {

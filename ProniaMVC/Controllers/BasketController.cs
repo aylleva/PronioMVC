@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿    using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -9,6 +9,7 @@ using NuGet.ContentModel;
 using ProniaMVC.DAL;
 using ProniaMVC.Models;
 using ProniaMVC.Services.Interfaces;
+using ProniaMVC.Utilitie.Exceptions;
 using ProniaMVC.ViewModels;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -84,9 +85,9 @@ namespace ProniaMVC.Controllers
         }
         public async Task<IActionResult> AddBasket(int? id)
         {
-            if (id is null || id < 1) return BadRequest();
+            if (id is null || id < 1) throw new BadRequestException("Ups ERROR");
             bool result = await _context.Products.AnyAsync(p => p.Id == id);
-            if (!result) return NotFound();
+            if (!result) throw new NotFountException($"Ups Not Found!!");
 
             if (User.Identity.IsAuthenticated)
             {
@@ -145,9 +146,9 @@ namespace ProniaMVC.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id is null || id < 1) return BadRequest();
+            if (id is null || id < 1) throw new BadRequestException("Ups ERROR");
             bool result = await _context.Products.AnyAsync(p => p.Id == id);
-            if (!result) return NotFound();
+            if (!result) throw new NotFountException($"Ups Not Found!!");
 
             if (User.Identity.IsAuthenticated)
             {
@@ -189,9 +190,9 @@ namespace ProniaMVC.Controllers
 
         public async Task<IActionResult> Pluscount(int? id)
         {
-            if (id is null || id < 1) return BadRequest();
+            if (id is null || id < 1) throw new BadRequestException("Ups ERROR");
             bool result = await _context.Products.AnyAsync(p => p.Id == id);
-            if (!result) return NotFound();
+            if (!result) throw new NotFountException($"Ups Not Found!!");
 
 
             if (User.Identity.IsAuthenticated)
@@ -234,9 +235,9 @@ namespace ProniaMVC.Controllers
 
         public async Task<IActionResult> Minuscount(int? id)
         {
-            if (id is null || id < 1) return BadRequest();
+            if (id is null || id < 1) throw new BadRequestException("Ups ERROR");
             bool result = await _context.Products.AnyAsync(p => p.Id == id);
-            if (!result) return NotFound();
+            if (!result) throw new NotFountException($"Ups Not Found!!");
 
             if (User.Identity.IsAuthenticated)
             {

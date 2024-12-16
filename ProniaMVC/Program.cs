@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.DAL;
+using ProniaMVC.Middlewares;
 using ProniaMVC.Models;
 using ProniaMVC.Services.Implementations;
 using ProniaMVC.Services.Interfaces;
@@ -42,6 +43,8 @@ namespace ProniaMVC
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<GlobalExceptionHandler>();
 
             app.MapControllerRoute(
 
