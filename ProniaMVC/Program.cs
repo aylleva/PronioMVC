@@ -44,7 +44,7 @@ namespace ProniaMVC
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseMiddleware<GlobalExceptionHandler>();
+            //app.UseMiddleware<GlobalExceptionHandler>();
 
             app.MapControllerRoute(
 
