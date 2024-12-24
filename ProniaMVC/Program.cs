@@ -37,6 +37,7 @@ namespace ProniaMVC
 
             builder.Services.AddScoped<ILayoutServices,LayoutServices>();
             builder.Services.AddScoped<IBasketServices,BasketServices>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
             var app = builder.Build();
             app.UseStaticFiles();
 

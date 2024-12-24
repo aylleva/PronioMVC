@@ -1,6 +1,7 @@
-﻿    using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
@@ -21,12 +22,14 @@ namespace ProniaMVC.Controllers
         private readonly AppDBContext _context;
         private readonly UserManager<AppUser> _usermanager;
         private readonly IBasketServices _basketservice;
+        private readonly IEmailService _emailservice;
 
-        public BasketController(AppDBContext context, UserManager<AppUser> usermanager,IBasketServices basketservice)
+        public BasketController(AppDBContext context, UserManager<AppUser> usermanager, IBasketServices basketservice, IEmailService emailservice)
         {
             _context = context;
             _usermanager = usermanager;
             _basketservice = basketservice;
+            _emailservice = emailservice;
         }
         public async Task<IActionResult> Index()
         {
@@ -308,6 +311,10 @@ namespace ProniaMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout(OrderVm ordervm)
         {
+            var user = await _usermanager.Users
+                    .Include(u => u.BasketItems)
+                    .FirstOrDefaultAsync(u => u.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
+
             var basketitems = await _context.BasketItems
                 .Include(b => b.Product)
                 .Where(b => b.Userid == User.FindFirstValue(ClaimTypes.NameIdentifier))
@@ -327,37 +334,92 @@ namespace ProniaMVC.Controllers
                 return View(ordervm);
             };
 
-            Order order = new Order {
-            Address=ordervm.Addres,
-            DateTime = DateTime.Now,
-            IsDeleted = false,
-            Status=null,
-            Userid=User.FindFirstValue(ClaimTypes.NameIdentifier),
-
-            Orderitems=basketitems.Select(b=>new OrderItem
+            Order order = new Order
             {
-               Userid= User.FindFirstValue(ClaimTypes.NameIdentifier),
-               ProductId=b.Product.Id,
-               Price=b.Product.Price,
-               Count=b.Count
+                Address = ordervm.Addres,
+                DateTime = DateTime.Now,
+                IsDeleted = false,
+                Status = null,
+                Userid = User.FindFirstValue(ClaimTypes.NameIdentifier),
 
-            }).ToList(),
-            Subtotal=basketitems.Sum(b=>b.Count*b.Product.Price)
+                Orderitems = basketitems.Select(b => new OrderItem
+                {
+                    Userid = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                    ProductId = b.Product.Id,
+                    Price = b.Product.Price,
+                    Count = b.Count
+
+                }).ToList(),
+                Subtotal = basketitems.Sum(b => b.Count * b.Product.Price)
             };
 
-             _context.Orders.Add(order);
+            _context.Orders.Add(order);
             _context.BasketItems.RemoveRange(basketitems);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(HomeController.Index),"Home");
-           
+            decimal total = 0;
+          
+
+            string body = @"<div class=""col-lg-6 col-12"">
+	<div class=""your-order"">
+		<h3>Your order</h3>
+		<div class=""your-order-table table-responsive"">
+			<table class=""table"">
+				<thead>
+					<tr>
+						<th class=""cart-product-name"">Product</th>
+						<th class=""cart-product-total"">Price</th>
+						<th class=""cart-product-total"">Total</th>
+					</tr>
+				</thead>
+				<tbody>";
+            foreach (var item in order.Orderitems)
+            {
+                total +=item.Price*item.Count;
+                body += @$"
+						<tr class=""cart_item"">
+							<td class=""cart-product-name"">
+								{item.Product.Name}<strong class=""product-quantity"">
+									× {item.Count}
+								</strong>
+							</td>
+							<td class=""cart-product-total"">
+								<span class=""amount"">{item.Price}</span>
+							</td>
+							<td class=""cart-product-total"">
+								<span class=""amount"">{item.Price * item.Count}</span>
+							</td>
+						</tr>
+					}}
+
+				</tbody>"
+                ;
+
+              
+            }
+            body += @$"<tfoot>
+                                    <tr class=""order-total"">
+                                        <th>Order Total</th>
+                                        <td>
+                                            <strong><span class=""amount"">{total}</span></strong>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                              <p>Thanks For Choosing Us!</p>
+";
+
+
+            await _emailservice.SendEmailAsync(user.Email, "Your Order", body, true);
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+
 
 
         }
 
     }
-         
-        
-       
-    
+
+
+
+
 }
